@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import Navigation from './components/Navigation'
+import Login from './components/Login'
+import Register from './components/Register'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const initialState = {
+  route: 'logIn',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    password: ''
+  }
 }
 
-export default App;
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = initialState
+  }
+
+  onRouteChange = route => {
+    if (route === 'logOut') {
+      this.setState(initialState)
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true })
+    }
+    this.setState({ route: route })
+  }
+
+  render() {
+    const { isSignedIn, route} = this.state
+    return (
+      <div className="App">
+        <Navigation isSignedIn={ isSignedIn } onRouteChange={ this.onRouteChange } />
+        { route === 'home'
+          ? <div>
+              CRUD
+            </div>
+          : (
+             route === 'logIn'
+             ? <Login onRouteChange={ this.onRouteChange } />
+             : <Register onRouteChange={ this.onRouteChange } />
+            )
+        }
+      </div>
+    )
+  }
+}
+
+export default App

@@ -20,3 +20,21 @@
 .App-link {
   color: #09d3ac;
 }
+
+.loginForm,
+.registerForm {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-button {
+  cursor: pointer;
+  padding: 20px;
+}
