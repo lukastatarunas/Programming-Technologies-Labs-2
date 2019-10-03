@@ -46,7 +46,7 @@ class Login extends React.Component {
                   <Label for="examplePassword">Password</Label>
                   <Input onChange={this.handleLoginInputPassword} type="password" name="password" id="examplePassword" placeholder="Enter Password" />
                 </FormGroup>
-                <Button onClick={this.handleLogin}>Login</Button>
+                <Button color="primary" onClick={this.handleLogin}>Login</Button>
               </Form>
             </div>
         )

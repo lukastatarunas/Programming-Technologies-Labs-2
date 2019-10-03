@@ -3,6 +3,7 @@ import './App.css'
 import Navigation from './components/Navigation'
 import Login from './components/Login'
 import Register from './components/Register'
+import Home from './components/Home'
 
 const initialState = {
   route: 'logIn',
@@ -36,9 +37,7 @@ class App extends React.Component {
       <div className="App">
         <Navigation isSignedIn={ isSignedIn } onRouteChange={ this.onRouteChange } />
         { route === 'home'
-          ? <div>
-              CRUD
-            </div>
+          ? <Home />
           : (
              route === 'logIn'
              ? <Login onRouteChange={ this.onRouteChange } />

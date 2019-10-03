@@ -57,7 +57,7 @@ class Register extends React.Component {
                   <Label for="examplePassword">Password</Label>
                   <Input onChange={this.handleRegisterInputPassword} type="password" name="password" id="examplePassword" placeholder="Enter Password" />
                 </FormGroup>
-                <Button onClick={this.handleRegister}>Register</Button>
+                <Button color="primary" onClick={this.handleRegister}>Register</Button>
               </Form>
             </div>
         )

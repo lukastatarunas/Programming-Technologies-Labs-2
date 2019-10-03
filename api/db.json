@@ -6,5 +6,42 @@
       "password": "420",
       "id": 1
     }
+  ],
+  "projects": [
+    {
+      "projectTitle": "123",
+      "startDate": "123",
+      "endDate": "123",
+      "tasks": [],
+      "id": 1
+    },
+    {
+      "projectTitle": "American Express",
+      "startDate": "2019-07-20",
+      "endDate": "2020-12-21",
+      "tasks": [
+        {
+          "taskTitle": "Be a big boy",
+          "taskStartDate": "2019-12-12",
+          "taskEndDate": "21212-12-54",
+          "users": [
+            "1"
+          ]
+        }
+      ],
+      "id": 2
+    },
+    {
+      "projectTitle": "UI",
+      "startDate": "Monday",
+      "endDate": "Friday",
+      "id": 3
+    },
+    {
+      "projectTitle": "API",
+      "startDate": "Monday",
+      "endDate": "Friday",
+      "id": 4
+    }
   ]
 }
