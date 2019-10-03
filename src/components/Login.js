@@ -37,6 +37,7 @@ class Login extends React.Component {
     render() {
         return (
             <div className="App">
+              <h1>LOGIN</h1>
               <Form className="loginForm">
                 <FormGroup>
                   <Label for="exampleEmail">Email</Label>

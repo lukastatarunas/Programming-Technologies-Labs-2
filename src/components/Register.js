@@ -44,6 +44,7 @@ class Register extends React.Component {
     render() {
         return (
             <div className="App">
+              <h1>REGISTER</h1>
               <Form className="registerForm">
                 <FormGroup>
                   <Label for="exampleName">Name</Label>

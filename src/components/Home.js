@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Table } from 'reactstrap'
 
 class Home extends React.Component {
     constructor(props) {
@@ -12,6 +12,7 @@ class Home extends React.Component {
                 startDate: ``,
                 endDate: ``
             },
+            fecthedProjects: []
         }
     }
 
@@ -19,10 +20,14 @@ class Home extends React.Component {
         this.readProjects()
     }
 
+    componentDidUpdate = () => {
+        this.readProjects()
+    }
+
     readProjects = () => {
         axios.get(`http://localhost:5000/projects`)
             .then(res => {
-                console.log(res.data)
+                this.setState({fecthedProjects: res.data})
             })
     }
 
@@ -46,11 +51,13 @@ class Home extends React.Component {
             .then(res => {
 
             })
-        this.setState(prevState => {
-            return {
+        this.setState(prevState => ({
                 modal: !prevState.modal
-            }
-        })
+        }))
+    }
+
+    componentWillUnmount = () => {
+
     }
 
     render() {
@@ -80,6 +87,28 @@ class Home extends React.Component {
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
+                <Table hover>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Project Title</th>
+                        <th>Project Start Date</th>
+                        <th>Project End Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.fecthedProjects.map((project, i) => {
+                        return (
+                            <tr key={i + 1}>
+                                <th scope="row">{i + 1}</th>
+                                <td>{project.projectTitle}</td>
+                                <td>{project.startDate}</td>
+                                <td>{project.endDate}</td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </Table>
             </div>
         )
     }
