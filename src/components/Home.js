@@ -59,7 +59,7 @@ class Home extends React.Component {
     deleteProject = e => {
         axios.delete(`http://localhost:5000/projects/${e.target.name}`)
             .then(res => {
-                
+
             })
     }
 
@@ -103,7 +103,7 @@ class Home extends React.Component {
                             <th>Project Title</th>
                             <th>Project Start Date</th>
                             <th>Project End Date</th>
-                            {/* <th>Project Tasks</th> */}
+                            <th>Project Tasks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,8 +111,8 @@ class Home extends React.Component {
                         return (
                             <tr key={i + 1}>
                                 <td>
-                                    <Button color="danger" onClick={this.toggle}>Create Task</Button>
-                                    <Button color="success" onClick={this.deleteProject} name={project.id}>Delete Project</Button>
+                                    <Button color="success" onClick={this.toggle}>Create Task</Button>
+                                    <Button color="danger" onClick={this.deleteProject} name={project.id}>Delete Project</Button>
                                     <br></br>
                                     <br></br>
                                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -139,7 +139,6 @@ class Home extends React.Component {
                                         </ModalFooter>
                                     </Modal>
                                 </td>
-                                {/* <td scope="row">{i + 1}</td> */}
                                 <td>{project.projectTitle}</td>
                                 <td>{project.startDate}</td>
                                 <td>{project.endDate}</td>
