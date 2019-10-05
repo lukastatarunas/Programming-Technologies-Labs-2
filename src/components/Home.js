@@ -148,7 +148,7 @@ class Home extends React.Component {
                 <Table hover>
                     <thead>
                         <tr>
-                            <th>Create Task or Delete Project</th>
+                            <th>Delete Project</th>
                             <th>Project Title</th>
                             <th>Project Start Date</th>
                             <th>Project End Date</th>
@@ -159,9 +159,9 @@ class Home extends React.Component {
                         return (
                             <tr key={i + 1}>
                                 <td>
-                                    <Button color="success" onClick={this.toggleTask}>Create Task</Button>
+                                    {/* <Button color="success" onClick={this.toggleTask}>Create Task</Button> */}
                                     <Button color="danger" onClick={this.deleteProject} name={project.id}>Delete Project</Button>
-                                    <Modal isOpen={this.state.modalTask} toggle={this.toggleTask} className={this.props.className}>
+                                    {/* <Modal isOpen={this.state.modalTask} toggle={this.toggleTask} className={this.props.className}>
                                         <ModalHeader toggle={this.toggleTask}>Create Task</ModalHeader>
                                         <ModalBody>
                                             <Form>
@@ -183,7 +183,7 @@ class Home extends React.Component {
                                             <Button color="primary" onClick={this.createTask}>Create Task</Button>{' '}
                                             <Button color="secondary" onClick={this.toggleTask}>Cancel</Button>
                                         </ModalFooter>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                                 <td>{project.projectTitle}</td>
                                 <td>{project.startDate}</td>
