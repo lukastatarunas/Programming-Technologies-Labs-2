@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-class Register extends React.Component {
+export let userId = 0
+
+export class Register extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,7 +42,7 @@ class Register extends React.Component {
         })
         .then(res => {
             this.props.onRouteChange('home')
-            console.log(res.data)
+            userId = res.data.id
         })
     }
 
@@ -67,5 +69,3 @@ class Register extends React.Component {
         )
     }
 }
-
-export default Register

@@ -2,17 +2,12 @@ import React from 'react'
 import './App.css'
 import Navigation from './components/Navigation'
 import Login from './components/Login'
-import Register from './components/Register'
+import { Register } from './components/Register'
 import Home from './components/Home'
 
 const initialState = {
   route: 'logIn',
-  isSignedIn: false,
-  // user: {
-  //   name: ``,
-  //   email: ``,
-  //   password: ``
-  // }
+  isSignedIn: false
 }
 
 class App extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Table } from 'reactstrap'
+import { userId } from './Register'
 
 let projectsForUser = []
 
@@ -60,7 +61,7 @@ class Home extends React.Component {
         axios.post(`http://localhost:5000/projects`, this.state.projectInputData)
             .then(res => {
                 projectsForUser.push(res.data.id)
-                axios.patch(`http://localhost:5000/users/1`, {
+                axios.patch(`http://localhost:5000/users/${userId}`, {
                     projects: projectsForUser
                 })
                 .then(() => {
@@ -77,7 +78,7 @@ class Home extends React.Component {
             .then(res => {
                 console.log(res.data)
                 projectsForUser.pop()
-                axios.patch(`http://localhost:5000/users/1`, {
+                axios.patch(`http://localhost:5000/users/${userId}`, {
                     projects: projectsForUser
                 })
                 .then(() => {
