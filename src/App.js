@@ -1,13 +1,19 @@
 import React from 'react'
 import './App.css'
 import Navigation from './components/Navigation'
-import Login from './components/Login'
 import { Register } from './components/Register'
+import { Login } from './components/Login'
 import Home from './components/Home'
 
 const initialState = {
-  route: 'logIn',
-  isSignedIn: false
+  route: `logIn`,
+  isSignedIn: false,
+  user: {
+    id: ``,
+    name: ``,
+    email: ``,
+    password: ``
+  }
 }
 
 class App extends React.Component {
@@ -16,10 +22,20 @@ class App extends React.Component {
     this.state = initialState
   }
 
+  loadUser = data => {
+    this.setState({ user: {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      projects: data.projects,
+      id: data.id
+    }})
+  }
+
   onRouteChange = route => {
-    if (route === 'logOut') {
+    if (route === `logOut`) {
       this.setState(initialState)
-    } else if (route === 'home') {
+    } else if (route === `home`) {
       this.setState({ isSignedIn: true })
     }
     this.setState({ route: route })
@@ -30,12 +46,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navigation isSignedIn={ isSignedIn } onRouteChange={ this.onRouteChange } />
-        { route === 'home'
+        { route === `home`
           ? <Home />
           : (
-             route === 'logIn'
-             ? <Login onRouteChange={ this.onRouteChange } />
-             : <Register onRouteChange={ this.onRouteChange } />
+             route === `logIn`
+             ? <Login onRouteChange={ this.onRouteChange } loadUser={ this.loadUser } />
+             : <Register onRouteChange={ this.onRouteChange } loadUser={ this.loadUser } />
             )
         }
       </div>

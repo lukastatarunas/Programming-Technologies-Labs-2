@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-class Login extends React.Component {
+export let userIdFromLogin = 0
+
+export class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -27,8 +29,10 @@ class Login extends React.Component {
       axios.get(`http://localhost:5000/users`)
         .then(res => {
           res.data.map(item => {
+            userIdFromLogin = res.data[0].id
             if (item.email === this.state.email && item.password === this.state.password) {
-              this.props.onRouteChange('home')
+              this.props.loadUser(res.data[0])
+              this.props.onRouteChange(`home`)
             }
           })
       })
@@ -53,5 +57,3 @@ class Login extends React.Component {
         )
     }
 }
-
-export default Login

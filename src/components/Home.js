@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Table } from 'reactstrap'
-import { userId } from './Register'
+import { userIdFromRegister } from './Register'
+import { userIdFromLogin } from './Login'
 
 let projectsForUser = []
 
@@ -61,7 +62,7 @@ class Home extends React.Component {
         axios.post(`http://localhost:5000/projects`, this.state.projectInputData)
             .then(res => {
                 projectsForUser.push(res.data.id)
-                axios.patch(`http://localhost:5000/users/${userId}`, {
+                axios.patch(`http://localhost:5000/users/${userIdFromRegister ? userIdFromRegister : userIdFromLogin}`, {
                     projects: projectsForUser
                 })
                 .then(() => {
@@ -76,9 +77,8 @@ class Home extends React.Component {
     deleteProject = e => {
         axios.delete(`http://localhost:5000/projects/${e.target.name}`)
             .then(res => {
-                console.log(res.data)
                 projectsForUser.pop()
-                axios.patch(`http://localhost:5000/users/${userId}`, {
+                axios.patch(`http://localhost:5000/users/${userIdFromRegister ? userIdFromRegister : userIdFromLogin}`, {
                     projects: projectsForUser
                 })
                 .then(() => {
@@ -159,9 +159,9 @@ class Home extends React.Component {
                         return (
                             <tr key={i + 1}>
                                 <td>
-                                    {/* <Button color="success" onClick={this.toggleTask}>Create Task</Button> */}
+                                    <Button color="success" onClick={this.toggleTask}>Create Task</Button>
                                     <Button color="danger" onClick={this.deleteProject} name={project.id}>Delete Project</Button>
-                                    {/* <Modal isOpen={this.state.modalTask} toggle={this.toggleTask} className={this.props.className}>
+                                    <Modal isOpen={this.state.modalTask} toggle={this.toggleTask} className={this.props.className}>
                                         <ModalHeader toggle={this.toggleTask}>Create Task</ModalHeader>
                                         <ModalBody>
                                             <Form>
@@ -183,7 +183,7 @@ class Home extends React.Component {
                                             <Button color="primary" onClick={this.createTask}>Create Task</Button>{' '}
                                             <Button color="secondary" onClick={this.toggleTask}>Cancel</Button>
                                         </ModalFooter>
-                                    </Modal> */}
+                                    </Modal>
                                 </td>
                                 <td>{project.projectTitle}</td>
                                 <td>{project.startDate}</td>

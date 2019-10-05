@@ -2,13 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-export let userId = 0
+export let userIdFromRegister = 0
 
 export class Register extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: 0,
             name: ``,
             email: ``,
             password: ``
@@ -41,8 +40,9 @@ export class Register extends React.Component {
             "projects": []
         })
         .then(res => {
-            this.props.onRouteChange('home')
-            userId = res.data.id
+            this.props.loadUser(res.data)
+            this.props.onRouteChange(`home`)
+            userIdFromRegister = res.data.id
         })
     }
 

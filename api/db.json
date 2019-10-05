@@ -4,32 +4,9 @@
       "name": "Lukas Tatarūnas",
       "email": "lukasttatarunas@gmail.com",
       "password": "o",
-      "projects": [
-        1,
-        2,
-        3
-      ],
+      "projects": [],
       "id": 1
     }
   ],
-  "projects": [
-    {
-      "projectTitle": "UI",
-      "startDate": "Monday",
-      "endDate": "Friday",
-      "id": 1
-    },
-    {
-      "projectTitle": "API",
-      "startDate": "Monday",
-      "endDate": "Friday",
-      "id": 2
-    },
-    {
-      "projectTitle": "DB",
-      "startDate": "Monday",
-      "endDate": "Friday",
-      "id": 3
-    }
-  ]
+  "projects": []
 }
