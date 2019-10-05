@@ -31,6 +31,7 @@ class Login extends React.Component {
               this.props.onRouteChange('home')
             }
           })
+          console.log(res.data)
       })
     }
 

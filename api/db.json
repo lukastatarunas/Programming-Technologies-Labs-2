@@ -3,16 +3,10 @@
     {
       "name": "Lukas Tatarūnas",
       "email": "lukasttatarunas@gmail.com",
-      "password": "lol",
+      "password": "o",
+      "projects": [],
       "id": 1
     }
   ],
-  "projects": [
-    {
-      "projectTitle": "API",
-      "startDate": "Monday",
-      "endDate": "Friday",
-      "id": 1
-    }
-  ]
+  "projects": []
 }

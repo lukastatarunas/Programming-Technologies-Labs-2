@@ -8,12 +8,11 @@ import Home from './components/Home'
 const initialState = {
   route: 'logIn',
   isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    password: ''
-  }
+  // user: {
+  //   name: ``,
+  //   email: ``,
+  //   password: ``
+  // }
 }
 
 class App extends React.Component {

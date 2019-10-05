@@ -2,17 +2,27 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Table } from 'reactstrap'
 
+let projectsForUser = []
+
 class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            modal: false,
+            modalProject: false,
             projectInputData: {
                 projectTitle: ``,
                 startDate: ``,
-                endDate: ``
+                endDate: ``,
             },
-            fecthedProjects: []
+            fecthedProjects: [],
+            modalTask: false,
+            taskInputData: {
+                taskTitle: ``,
+                startDate: ``,
+                endDate: ``,
+                users: []
+            },
+            fecthedTasks: []
         }
     }
 
@@ -31,9 +41,9 @@ class Home extends React.Component {
             })
     }
 
-    toggle = () => {
+    toggleProject = () => {
         this.setState(prevState => ({
-          modal: !prevState.modal
+            modalProject: !prevState.modalProject
         }))
     }
 
@@ -49,18 +59,56 @@ class Home extends React.Component {
     createProject = () => {
         axios.post(`http://localhost:5000/projects`, this.state.projectInputData)
             .then(res => {
+                projectsForUser.push(res.data.id)
+                axios.patch(`http://localhost:5000/users/1`, {
+                    projects: projectsForUser
+                })
+                .then(() => {
 
+                })
             })
         this.setState(prevState => ({
-                modal: !prevState.modal
+            modalProject: !prevState.modalProject
         }))
     }
 
     deleteProject = e => {
         axios.delete(`http://localhost:5000/projects/${e.target.name}`)
             .then(res => {
+                console.log(res.data)
+                projectsForUser.pop()
+                axios.patch(`http://localhost:5000/users/1`, {
+                    projects: projectsForUser
+                })
+                .then(() => {
+
+                })
+            })
+    }
+
+    toggleTask = () => {
+        this.setState(prevState => ({
+            modalTask: !prevState.modalTask
+        }))
+    }
+
+    handleTaskInputData = e => {
+        this.setState({
+            taskInputData: {
+                ...this.state.taskInputData,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    createTask = () => {
+        axios.post(`http://localhost:5000/projects`, this.state.taskInputData)
+            .then(res => {
 
             })
+        this.setState(prevState => ({
+            modalTask: !prevState.modalTask
+        }))
     }
 
     componentWillUnmount = () => {
@@ -70,11 +118,11 @@ class Home extends React.Component {
     render() {
         return (
             <div className="App">
-                <Button color="primary" onClick={this.toggle}>Create Project</Button>
+                <Button color="primary" onClick={this.toggleProject}>Create Project</Button>
                 <br></br>
                 <br></br>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>Create Project</ModalHeader>
+                <Modal isOpen={this.state.modalProject} toggle={this.toggleProject} className={this.props.className}>
+                    <ModalHeader toggle={this.toggleProject}>Create Project</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
@@ -93,7 +141,7 @@ class Home extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.createProject}>Create Project</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button color="secondary" onClick={this.toggleProject}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                 <Table hover>
@@ -103,7 +151,6 @@ class Home extends React.Component {
                             <th>Project Title</th>
                             <th>Project Start Date</th>
                             <th>Project End Date</th>
-                            <th>Project Tasks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,31 +158,29 @@ class Home extends React.Component {
                         return (
                             <tr key={i + 1}>
                                 <td>
-                                    <Button color="success" onClick={this.toggle}>Create Task</Button>
+                                    <Button color="success" onClick={this.toggleTask}>Create Task</Button>
                                     <Button color="danger" onClick={this.deleteProject} name={project.id}>Delete Project</Button>
-                                    <br></br>
-                                    <br></br>
-                                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                                        <ModalHeader toggle={this.toggle}>Create Project</ModalHeader>
+                                    <Modal isOpen={this.state.modalTask} toggle={this.toggleTask} className={this.props.className}>
+                                        <ModalHeader toggle={this.toggleTask}>Create Task</ModalHeader>
                                         <ModalBody>
                                             <Form>
                                                 <FormGroup>
-                                                    <Label >Project Title</Label>
-                                                    <Input type="text" name="projectTitle" onChange={this.handleProjectInputData} />
+                                                    <Label >Task Title</Label>
+                                                    <Input type="text" name="projectTitle" onChange={this.handleTaskInputData} />
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Label >Start Date</Label>
-                                                    <Input type="text" name="startDate" onChange={this.handleProjectInputData} />
+                                                    <Input type="text" name="startDate" onChange={this.handleTaskInputData} />
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Label >Finnish Date</Label>
-                                                    <Input type="text" name="endDate" onChange={this.handleProjectInputData} />
+                                                    <Input type="text" name="endDate" onChange={this.handleTaskInputData} />
                                                 </FormGroup>
                                             </Form>
                                         </ModalBody>
                                         <ModalFooter>
-                                            <Button color="primary" onClick={this.createProject}>Create Project</Button>{' '}
-                                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                                            <Button color="primary" onClick={this.createTask}>Create Task</Button>{' '}
+                                            <Button color="secondary" onClick={this.toggleTask}>Cancel</Button>
                                         </ModalFooter>
                                     </Modal>
                                 </td>

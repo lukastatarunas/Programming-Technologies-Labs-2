@@ -6,6 +6,7 @@ class Register extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: 0,
             name: ``,
             email: ``,
             password: ``
@@ -34,10 +35,12 @@ class Register extends React.Component {
         axios.post(`http://localhost:5000/users`, {
             "name": this.state.name,
             "email": this.state.email,
-            "password": this.state.password
+            "password": this.state.password,
+            "projects": []
         })
         .then(res => {
             this.props.onRouteChange('home')
+            console.log(res.data)
         })
     }
 
