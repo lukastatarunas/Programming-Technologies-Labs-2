@@ -7,29 +7,13 @@ import Home from './components/Home'
 
 const initialState = {
   route: `logIn`,
-  isSignedIn: false,
-  user: {
-    id: ``,
-    name: ``,
-    email: ``,
-    password: ``
-  }
+  isSignedIn: false
 }
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = initialState
-  }
-
-  loadUser = data => {
-    this.setState({ user: {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      projects: data.projects,
-      id: data.id
-    }})
   }
 
   onRouteChange = route => {
@@ -50,8 +34,8 @@ class App extends React.Component {
           ? <Home />
           : (
              route === `logIn`
-             ? <Login onRouteChange={ this.onRouteChange } loadUser={ this.loadUser } />
-             : <Register onRouteChange={ this.onRouteChange } loadUser={ this.loadUser } />
+             ? <Login onRouteChange={ this.onRouteChange } />
+             : <Register onRouteChange={ this.onRouteChange } />
             )
         }
       </div>

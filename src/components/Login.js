@@ -28,10 +28,9 @@ export class Login extends React.Component {
     handleLogin = () => {
       axios.get(`http://localhost:5000/users`)
         .then(res => {
-          res.data.map(item => {
+          res.data.forEach(item => {
             userIdFromLogin = res.data[0].id
             if (item.email === this.state.email && item.password === this.state.password) {
-              this.props.loadUser(res.data[0])
               this.props.onRouteChange(`home`)
             }
           })

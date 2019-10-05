@@ -40,7 +40,6 @@ export class Register extends React.Component {
             "projects": []
         })
         .then(res => {
-            this.props.loadUser(res.data)
             this.props.onRouteChange(`home`)
             userIdFromRegister = res.data.id
         })
