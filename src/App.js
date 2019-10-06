@@ -1,43 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './App.css'
-import Navigation from './components/Navigation'
-import { Register } from './components/Register'
-import { Login } from './components/Login'
+import Authentication from './components/Authentication'
 import Home from './components/Home'
 
-const initialState = {
-  route: `logIn`,
-  isSignedIn: false
-}
-
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super()
-    this.state = initialState
+    this.state = {
+      isAuthenticated: false,
+      userId: ``
+    }
   }
 
-  onRouteChange = route => {
-    if (route === `logOut`) {
-      this.setState(initialState)
-    } else if (route === `home`) {
-      this.setState({ isSignedIn: true })
-    }
-    this.setState({ route: route })
+  checkAuthentification = (authenticated, userIdCallBack) => {
+    this.setState({ isAuthenticated: authenticated, userId: userIdCallBack })
   }
 
   render() {
-    const { isSignedIn, route} = this.state
     return (
       <div className="App">
-        <Navigation isSignedIn={ isSignedIn } onRouteChange={ this.onRouteChange } />
-        { route === `home`
-          ? <Home />
-          : (
-             route === `logIn`
-             ? <Login onRouteChange={ this.onRouteChange } />
-             : <Register onRouteChange={ this.onRouteChange } />
-            )
-        }
+        {this.state.isAuthenticated === false ? <Authentication checkForAuthentification={this.checkAuthentification}/> 
+        : <Home userId={this.state.userId} />}
       </div>
     )
   }

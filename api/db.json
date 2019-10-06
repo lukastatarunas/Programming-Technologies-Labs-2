@@ -1,22 +1,72 @@
 {
   "users": [
     {
-      "name": "Lukas Tatarūnas",
-      "email": "lukasttatarunas@gmail.com",
-      "password": "o",
+      "username": "Lukas",
+      "password": "lukas",
+      "userType": "Individual",
       "projects": [
-        1
+        1,
+        2,
+        3
       ],
       "id": 1
+    },
+    {
+      "username": "VGTU",
+      "password": "vgtu",
+      "userType": "Company",
+      "projects": [
+        4
+      ],
+      "id": 2
     }
   ],
   "projects": [
     {
       "projectTitle": "UI",
-      "startDate": "Monday",
-      "endDate": "Friday",
-      "tasks": [],
+      "projectStartDate": "Monday",
+      "projectEndDate": "Friday",
+      "tasks": [
+        {
+          "taskTitle": "Form",
+          "taskStartDate": "Monday",
+          "taskEndDate": "Friday",
+          "users": [
+            "1"
+          ]
+        }
+      ],
       "id": 1
+    },
+    {
+      "projectTitle": "API",
+      "projectStartDate": "Monday",
+      "projectEndDate": "Friday",
+      "tasks": [],
+      "id": 2
+    },
+    {
+      "projectTitle": "DB",
+      "projectStartDate": "Monday",
+      "projectEndDate": "Friday",
+      "tasks": [],
+      "id": 3
+    },
+    {
+      "projectTitle": "VGTU",
+      "projectStartDate": "Monday",
+      "projectEndDate": "Friday",
+      "tasks": [
+        {
+          "taskTitle": "Game",
+          "taskStartDate": "Monday",
+          "taskEndDate": "Friday",
+          "users": [
+            "2"
+          ]
+        }
+      ],
+      "id": 4
     }
   ]
 }
